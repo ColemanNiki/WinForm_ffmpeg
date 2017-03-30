@@ -14,6 +14,8 @@ namespace ffmpeg
 {
     public partial class Form1 : Form
     {
+        cmdProcess liveP;
+        bool liveReady = false;
         public Form1()
         {
             InitializeComponent();
@@ -21,16 +23,7 @@ namespace ffmpeg
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //cmdProcess p = new cmdProcess();
-            //string value = p.write("ffmpeg");  
-            //this.tip.Text = value;
             Control.CheckForIllegalCrossThreadCalls = false;
-            //str1 = Environment.CurrentDirectory;
-            //str1 += @"\ffmpeg\bin\ffmpeg.exe";
-            //p.StartInfo.FileName = @str1;//要调用外部程序的绝对路径
-            //p.StartInfo.UseShellExecute = false;//不使用操作系统外壳程序启动线程(一定为FALSE,详细的请看MSDN)
-            //p.StartInfo.RedirectStandardError = true;
-            //p.StartInfo.CreateNoWindow = true;//不创建进程窗口
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,7 +46,7 @@ namespace ffmpeg
                 Match match = Regex.Match(output.Data, @pattern);
                 if (match.Success)
                 {
-                    dShowName.Items.Add(match.Value);
+                    dShow_Name.Items.Add(match.Value);
                 }
             }
         }
@@ -61,7 +54,7 @@ namespace ffmpeg
         private void chance_option_Click(object sender, EventArgs e)
         {
             cmdProcess p = new cmdProcess();
-            string arguments = "-list_options true -f dshow -i video=\"" + dShowName.Text + "\"";
+            string arguments = "-list_options true -f dshow -i video=\"" + dShow_Name.Text + "\"";
             p.InitP(arguments);
             p.ErrorDataReceived += new DataReceivedEventHandler(option_Append);
             p.Start();
@@ -75,13 +68,65 @@ namespace ffmpeg
         {
             if (!String.IsNullOrEmpty(output.Data))
             {
-                string pattern = "s=.+fps=\\d+";
+                string pattern = "s=.+?fps=\\d+";
                 MatchCollection matches = Regex.Matches(output.Data, pattern);
                 foreach(Match match in matches)
                 {
                     dShow_option.Items.Add(match.Value);
                 }
             }
+        }
+
+        private void getCommend_Click(object sender, EventArgs e)
+        {
+            if(dShow_Name.Text != "" && dShow_option.Text != "")
+            {
+                string url = sendURL.Text;
+                bool isUrl = Regex.IsMatch(url, @"https?://");
+                if (isUrl)
+                {
+                    Match match = Regex.Match(dShow_option.Text, "(?<=(fps=))\\d+");
+                    string fps = match.Value;
+                    Console.WriteLine(fps);
+                    match = Regex.Match(dShow_option.Text, "(?<=(s=))\\d+x\\d+");
+                    string size = match.Value;
+                    string commend = "-f dshow -framerate " + fps + " -video_size " + size + " -i video=\"" + dShow_Name.Text + "\""
+                        + " -f mpegts -codec:v mpeg1video -s 640x480 -b:v 500k -bf 0 \"" + url +"\"";
+                    tip.Text = commend;
+                    liveReady = true;
+                }
+                else
+                {
+                    tip.Text = "url设置不正确";
+                }
+            }
+            else
+            {
+                tip.Text = "请先设置好参数";
+            }
+        }
+
+        private void startLive_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(tip.Text) && liveReady)
+            {
+                liveP = new cmdProcess();
+                Console.WriteLine(tip.Text);
+                liveP.InitP(tip.Text);
+                liveP.Start();
+                liveP.BeginErrorReadLine();
+                liveP.WaitForExit();
+            }
+            else
+            {
+                tip.Text = "请先设置好参数";
+            }
+        }
+
+        private void stopLive_Click(object sender, EventArgs e)
+        {
+            liveP.Close();
+            liveP.Dispose();
         }
     }
 }
