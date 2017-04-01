@@ -145,7 +145,16 @@ namespace ffmpeg
         {
             if (!String.IsNullOrEmpty(output.Data))
             {
-                Console.WriteLine(output.Data);
+                string pattern = "fps.*/s";
+                if (Regex.IsMatch(output.Data, pattern))
+                {
+                    Console.WriteLine(output.Data);
+                    string fps = Regex.Match(output.Data, "(?<=(fps=\\s)).*?(?=\\s)").Value;
+                    string time = Regex.Match(output.Data, "(?<=(time=)).*?(?=\\.)").Value;
+                    string bitrate = Regex.Match(output.Data, "(?<=(bitrate=\\s)).*?(?=\\s)").Value;
+                    string stateTip = "fps:" + fps + "  time:" + time + " bitrate:" + bitrate;
+                    liveState.Text = stateTip;
+                }
             }
         }
     }

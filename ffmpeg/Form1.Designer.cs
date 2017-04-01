@@ -38,6 +38,7 @@
             this.getCommend = new System.Windows.Forms.Button();
             this.startLive = new System.Windows.Forms.Button();
             this.stopLive = new System.Windows.Forms.Button();
+            this.liveState = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tip
@@ -132,11 +133,22 @@
             this.stopLive.UseVisualStyleBackColor = true;
             this.stopLive.Click += new System.EventHandler(this.stopLive_Click);
             // 
+            // liveState
+            // 
+            this.liveState.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.liveState.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.liveState.Location = new System.Drawing.Point(33, 330);
+            this.liveState.Name = "liveState";
+            this.liveState.ReadOnly = true;
+            this.liveState.Size = new System.Drawing.Size(263, 14);
+            this.liveState.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 363);
+            this.Controls.Add(this.liveState);
             this.Controls.Add(this.stopLive);
             this.Controls.Add(this.startLive);
             this.Controls.Add(this.getCommend);
@@ -167,6 +179,7 @@
         private System.Windows.Forms.Button getCommend;
         private System.Windows.Forms.Button startLive;
         private System.Windows.Forms.Button stopLive;
+        private System.Windows.Forms.TextBox liveState;
     }
 }
 
