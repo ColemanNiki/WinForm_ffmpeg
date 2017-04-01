@@ -48,6 +48,7 @@ namespace ffmpeg
                 {
                     dShow_Name.Items.Add(match.Value);
                 }
+                dShow_Name.Enabled = true;
             }
         }
 
@@ -74,6 +75,7 @@ namespace ffmpeg
                 {
                     dShow_option.Items.Add(match.Value);
                 }
+                dShow_option.Enabled = true;
             }
         }
 
@@ -155,6 +157,14 @@ namespace ffmpeg
                     string stateTip = "fps:" + fps + "  time:" + time + " bitrate:" + bitrate;
                     liveState.Text = stateTip;
                 }
+            }
+        }
+
+        private void dShow_Name_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(dShow_Name.Text))
+            {
+                choose_option.Enabled = true;
             }
         }
     }
