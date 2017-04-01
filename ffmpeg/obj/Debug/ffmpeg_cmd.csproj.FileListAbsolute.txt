@@ -1,0 +1,9 @@
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\bin\Debug\ffmpeg.exe.config
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\bin\Debug\ffmpeg.exe
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\bin\Debug\ffmpeg.pdb
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\obj\Debug\ffmpeg.Form1.resources
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\obj\Debug\ffmpeg.Properties.Resources.resources
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\obj\Debug\ffmpeg_cmd.csproj.GenerateResource.Cache
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\obj\Debug\ffmpeg.exe
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\obj\Debug\ffmpeg.pdb
+C:\Users\ColemanNiki\Documents\Visual Studio 2015\Projects\ffmpeg\ffmpeg\obj\Debug\ffmpeg_cmd.csprojResolveAssemblyReference.cache

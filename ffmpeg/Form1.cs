@@ -114,8 +114,8 @@ namespace ffmpeg
                 Console.WriteLine(tip.Text);
                 liveP.InitP(tip.Text);
                 liveP.Start();
+                liveP.ErrorDataReceived += new DataReceivedEventHandler(show_liveState);
                 liveP.BeginErrorReadLine();
-                liveP.WaitForExit();
             }
             else
             {
@@ -125,8 +125,28 @@ namespace ffmpeg
 
         private void stopLive_Click(object sender, EventArgs e)
         {
-            liveP.Close();
-            liveP.Dispose();
+            foreach(Process p in Process.GetProcessesByName("ffmpeg"))
+            {
+                try
+                {
+                    p.Kill();
+                    p.WaitForExit();
+                    p.Dispose();
+                }
+                catch(Exception exp)
+                {
+                    Console.WriteLine(exp.Message);
+                    Console.WriteLine("该进程无法杀死");
+                }
+            }
+        }
+
+        private void show_liveState(object sendProcess, DataReceivedEventArgs output)
+        {
+            if (!String.IsNullOrEmpty(output.Data))
+            {
+                Console.WriteLine(output.Data);
+            }
         }
     }
 }
