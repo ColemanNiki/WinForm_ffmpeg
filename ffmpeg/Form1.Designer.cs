@@ -39,12 +39,15 @@
             this.startLive = new System.Windows.Forms.Button();
             this.stopLive = new System.Windows.Forms.Button();
             this.liveState = new System.Windows.Forms.TextBox();
+            this.all_in_check = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.bitSize = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tip
             // 
             this.tip.Enabled = false;
-            this.tip.Location = new System.Drawing.Point(140, 182);
+            this.tip.Location = new System.Drawing.Point(148, 283);
             this.tip.Multiline = true;
             this.tip.Name = "tip";
             this.tip.ReadOnly = true;
@@ -53,7 +56,8 @@
             // 
             // choose_dShow
             // 
-            this.choose_dShow.Location = new System.Drawing.Point(33, 30);
+            this.choose_dShow.Enabled = false;
+            this.choose_dShow.Location = new System.Drawing.Point(33, 100);
             this.choose_dShow.Name = "choose_dShow";
             this.choose_dShow.Size = new System.Drawing.Size(75, 23);
             this.choose_dShow.TabIndex = 1;
@@ -66,7 +70,7 @@
             this.dShow_Name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dShow_Name.Enabled = false;
             this.dShow_Name.FormattingEnabled = true;
-            this.dShow_Name.Location = new System.Drawing.Point(149, 30);
+            this.dShow_Name.Location = new System.Drawing.Point(148, 100);
             this.dShow_Name.Name = "dShow_Name";
             this.dShow_Name.Size = new System.Drawing.Size(121, 20);
             this.dShow_Name.TabIndex = 2;
@@ -77,7 +81,7 @@
             this.dShow_option.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dShow_option.Enabled = false;
             this.dShow_option.FormattingEnabled = true;
-            this.dShow_option.Location = new System.Drawing.Point(149, 81);
+            this.dShow_option.Location = new System.Drawing.Point(148, 155);
             this.dShow_option.Name = "dShow_option";
             this.dShow_option.Size = new System.Drawing.Size(121, 20);
             this.dShow_option.TabIndex = 3;
@@ -85,7 +89,7 @@
             // choose_option
             // 
             this.choose_option.Enabled = false;
-            this.choose_option.Location = new System.Drawing.Point(33, 79);
+            this.choose_option.Location = new System.Drawing.Point(33, 152);
             this.choose_option.Name = "choose_option";
             this.choose_option.Size = new System.Drawing.Size(75, 23);
             this.choose_option.TabIndex = 4;
@@ -96,7 +100,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 130);
+            this.label1.Location = new System.Drawing.Point(43, 222);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 5;
@@ -104,14 +108,14 @@
             // 
             // sendURL
             // 
-            this.sendURL.Location = new System.Drawing.Point(102, 127);
+            this.sendURL.Location = new System.Drawing.Point(148, 219);
             this.sendURL.Name = "sendURL";
-            this.sendURL.Size = new System.Drawing.Size(184, 21);
+            this.sendURL.Size = new System.Drawing.Size(133, 21);
             this.sendURL.TabIndex = 6;
             // 
             // getCommend
             // 
-            this.getCommend.Location = new System.Drawing.Point(33, 180);
+            this.getCommend.Location = new System.Drawing.Point(33, 271);
             this.getCommend.Name = "getCommend";
             this.getCommend.Size = new System.Drawing.Size(75, 23);
             this.getCommend.TabIndex = 7;
@@ -121,7 +125,7 @@
             // 
             // startLive
             // 
-            this.startLive.Location = new System.Drawing.Point(33, 232);
+            this.startLive.Location = new System.Drawing.Point(33, 331);
             this.startLive.Name = "startLive";
             this.startLive.Size = new System.Drawing.Size(75, 23);
             this.startLive.TabIndex = 8;
@@ -131,7 +135,7 @@
             // 
             // stopLive
             // 
-            this.stopLive.Location = new System.Drawing.Point(33, 278);
+            this.stopLive.Location = new System.Drawing.Point(33, 390);
             this.stopLive.Name = "stopLive";
             this.stopLive.Size = new System.Drawing.Size(75, 23);
             this.stopLive.TabIndex = 9;
@@ -143,18 +147,50 @@
             // 
             this.liveState.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.liveState.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.liveState.Location = new System.Drawing.Point(33, 330);
+            this.liveState.Location = new System.Drawing.Point(33, 439);
             this.liveState.Name = "liveState";
             this.liveState.ReadOnly = true;
-            this.liveState.Size = new System.Drawing.Size(263, 14);
+            this.liveState.Size = new System.Drawing.Size(357, 14);
             this.liveState.TabIndex = 10;
+            // 
+            // all_in_check
+            // 
+            this.all_in_check.AutoSize = true;
+            this.all_in_check.Location = new System.Drawing.Point(33, 42);
+            this.all_in_check.Name = "all_in_check";
+            this.all_in_check.Size = new System.Drawing.Size(72, 16);
+            this.all_in_check.TabIndex = 11;
+            this.all_in_check.Text = "全屏直播";
+            this.all_in_check.UseVisualStyleBackColor = true;
+            this.all_in_check.CheckedChanged += new System.EventHandler(this.all_in_check_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(123, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(143, 12);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "输入推送质量（建议500）";
+            // 
+            // bitSize
+            // 
+            this.bitSize.Location = new System.Drawing.Point(272, 40);
+            this.bitSize.Name = "bitSize";
+            this.bitSize.Size = new System.Drawing.Size(60, 21);
+            this.bitSize.TabIndex = 13;
+            this.bitSize.Text = "500";
+            this.bitSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(334, 363);
+            this.ClientSize = new System.Drawing.Size(362, 465);
+            this.Controls.Add(this.bitSize);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.all_in_check);
             this.Controls.Add(this.liveState);
             this.Controls.Add(this.stopLive);
             this.Controls.Add(this.startLive);
@@ -187,6 +223,9 @@
         private System.Windows.Forms.Button startLive;
         private System.Windows.Forms.Button stopLive;
         private System.Windows.Forms.TextBox liveState;
+        private System.Windows.Forms.CheckBox all_in_check;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox bitSize;
     }
 }
 

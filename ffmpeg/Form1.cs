@@ -24,6 +24,7 @@ namespace ffmpeg
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
+            all_in_check.CheckState = CheckState.Checked;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -81,21 +82,30 @@ namespace ffmpeg
 
         private void getCommend_Click(object sender, EventArgs e)
         {
-            if(dShow_Name.Text != "" && dShow_option.Text != "")
+            if((dShow_Name.Text != "" && dShow_option.Text != "") || all_in_check.CheckState == CheckState.Checked)
             {
                 string url = sendURL.Text;
                 bool isUrl = Regex.IsMatch(url, @"https?://");
                 if (isUrl)
                 {
-                    Match match = Regex.Match(dShow_option.Text, "(?<=(fps=))\\d+");
-                    string fps = match.Value;
-                    Console.WriteLine(fps);
-                    match = Regex.Match(dShow_option.Text, "(?<=(s=))\\d+x\\d+");
-                    string size = match.Value;
-                    string commend = "-f dshow -framerate " + fps + " -video_size " + size + " -i video=\"" + dShow_Name.Text + "\""
-                        + " -f mpegts -codec:v mpeg1video -s 640x480 -b:v 500k -bf 0 \"" + url +"\"";
-                    tip.Text = commend;
-                    liveReady = true;
+                    if (all_in_check.CheckState == CheckState.Unchecked)
+                    {
+                        Match match = Regex.Match(dShow_option.Text, "(?<=(fps=))\\d+");
+                        string fps = match.Value;
+                        Console.WriteLine(fps);
+                        match = Regex.Match(dShow_option.Text, "(?<=(s=))\\d+x\\d+");
+                        string size = match.Value;
+                        string commend = "-f dshow -framerate " + fps + " -video_size " + size + " -i video=\"" + dShow_Name.Text + "\""
+                            + " -f mpegts -codec:v mpeg1video -s 1000x600 -b:v "+ bitSize.Text + "k -bf 0 \"" + url + "\"";
+                        tip.Text = commend;
+                        liveReady = true;
+                    }
+                    else
+                    {
+                        string commend = "-f gdigrab -framerate 30 -i desktop " + " -f mpegts   -codec:v mpeg1video -preset ultrafast -crf 1 -s 1000x600 -b:v " + bitSize.Text + "k -bf 0 \"" + url + "\"";
+                        tip.Text = commend;
+                        liveReady = true;
+                    }
                 }
                 else
                 {
@@ -165,6 +175,18 @@ namespace ffmpeg
             if (!String.IsNullOrEmpty(dShow_Name.Text))
             {
                 choose_option.Enabled = true;
+            }
+        }
+
+        private void all_in_check_CheckedChanged(object sender, EventArgs e)
+        {
+            if(all_in_check.CheckState == CheckState.Checked)
+            {
+                choose_dShow.Enabled = false;
+            }
+            else
+            {
+                choose_dShow.Enabled = true;
             }
         }
     }
