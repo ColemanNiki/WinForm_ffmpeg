@@ -82,13 +82,11 @@ namespace ffmpeg
 
         private void getCommend_Click(object sender, EventArgs e)
         {
-            if((dShow_Name.Text != "" && dShow_option.Text != "") || all_in_check.CheckState == CheckState.Checked)
-            {
                 string url = sendURL.Text;
                 bool isUrl = Regex.IsMatch(url, @"https?://");
                 if (isUrl)
                 {
-                    if (all_in_check.CheckState == CheckState.Unchecked)
+                    if (carema_check.CheckState == CheckState.Checked)
                     {
                         Match match = Regex.Match(dShow_option.Text, "(?<=(fps=))\\d+");
                         string fps = match.Value;
@@ -100,9 +98,17 @@ namespace ffmpeg
                         tip.Text = commend;
                         liveReady = true;
                     }
+                    else if(all_in_check.CheckState == CheckState.Checked)
+                    {
+                        string commend = "-f gdigrab -framerate 30 -i desktop " + " -f mpegts   -codec:v mpeg1video -preset ultrafast -crf 1 -s 1000x600 -b:v " 
+                            + bitSize.Text + "k -bf 0 \"" + url + "\"";
+                        tip.Text = commend;
+                        liveReady = true;
+                    }
                     else
                     {
-                        string commend = "-f gdigrab -framerate 30 -i desktop " + " -f mpegts   -codec:v mpeg1video -preset ultrafast -crf 1 -s 1000x600 -b:v " + bitSize.Text + "k -bf 0 \"" + url + "\"";
+                        string commend = "-i "+local_file.Text+ " -f mpegts -codec:v mpeg1video -preset ultrafast -crf 1 -s 1000x600 -b:v " 
+                                + bitSize.Text + "k -bf 0 \"" + url + "\"";
                         tip.Text = commend;
                         liveReady = true;
                     }
@@ -111,11 +117,6 @@ namespace ffmpeg
                 {
                     tip.Text = "url设置不正确";
                 }
-            }
-            else
-            {
-                tip.Text = "请先设置好参数";
-            }
         }
 
         private void startLive_Click(object sender, EventArgs e)
@@ -182,10 +183,34 @@ namespace ffmpeg
         {
             if(all_in_check.CheckState == CheckState.Checked)
             {
+                local_check_box.CheckState = CheckState.Unchecked;
+                carema_check.CheckState = CheckState.Unchecked;
                 choose_dShow.Enabled = false;
             }
-            else
+        }
+
+        private void local_check_box_CheckedChanged(object sender, EventArgs e)
+        {
+            if(local_check_box.CheckState == CheckState.Checked)
             {
+                all_in_check.CheckState = CheckState.Unchecked;
+                carema_check.CheckState = CheckState.Unchecked;
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Multiselect = false;
+                dialog.Title = "请选择视频文件";
+                if(dialog.ShowDialog() == DialogResult.OK)
+                {
+                    local_file.Text = dialog.FileName;
+                }
+            }
+        }
+
+        private void carema_check_CheckedChanged(object sender, EventArgs e)
+        {
+            if(carema_check.CheckState == CheckState.Checked)
+            {
+                all_in_check.CheckState = CheckState.Unchecked;
+                local_check_box.CheckState = CheckState.Unchecked;
                 choose_dShow.Enabled = true;
             }
         }

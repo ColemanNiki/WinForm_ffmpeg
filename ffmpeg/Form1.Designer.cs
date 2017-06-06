@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tip = new System.Windows.Forms.TextBox();
             this.choose_dShow = new System.Windows.Forms.Button();
             this.dShow_Name = new System.Windows.Forms.ComboBox();
@@ -42,11 +43,14 @@
             this.all_in_check = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.bitSize = new System.Windows.Forms.TextBox();
+            this.local_check_box = new System.Windows.Forms.CheckBox();
+            this.carema_check = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.local_file = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tip
             // 
-            this.tip.Enabled = false;
             this.tip.Location = new System.Drawing.Point(148, 283);
             this.tip.Multiline = true;
             this.tip.Name = "tip";
@@ -81,7 +85,7 @@
             this.dShow_option.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dShow_option.Enabled = false;
             this.dShow_option.FormattingEnabled = true;
-            this.dShow_option.Location = new System.Drawing.Point(148, 155);
+            this.dShow_option.Location = new System.Drawing.Point(148, 132);
             this.dShow_option.Name = "dShow_option";
             this.dShow_option.Size = new System.Drawing.Size(121, 20);
             this.dShow_option.TabIndex = 3;
@@ -89,7 +93,7 @@
             // choose_option
             // 
             this.choose_option.Enabled = false;
-            this.choose_option.Location = new System.Drawing.Point(33, 152);
+            this.choose_option.Location = new System.Drawing.Point(33, 129);
             this.choose_option.Name = "choose_option";
             this.choose_option.Size = new System.Drawing.Size(75, 23);
             this.choose_option.TabIndex = 4;
@@ -100,7 +104,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 222);
+            this.label1.Location = new System.Drawing.Point(34, 210);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 5;
@@ -108,7 +112,7 @@
             // 
             // sendURL
             // 
-            this.sendURL.Location = new System.Drawing.Point(148, 219);
+            this.sendURL.Location = new System.Drawing.Point(148, 207);
             this.sendURL.Name = "sendURL";
             this.sendURL.Size = new System.Drawing.Size(133, 21);
             this.sendURL.TabIndex = 6;
@@ -156,7 +160,9 @@
             // all_in_check
             // 
             this.all_in_check.AutoSize = true;
-            this.all_in_check.Location = new System.Drawing.Point(33, 42);
+            this.all_in_check.Checked = true;
+            this.all_in_check.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.all_in_check.Location = new System.Drawing.Point(36, 29);
             this.all_in_check.Name = "all_in_check";
             this.all_in_check.Size = new System.Drawing.Size(72, 16);
             this.all_in_check.TabIndex = 11;
@@ -167,7 +173,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(123, 43);
+            this.label2.Location = new System.Drawing.Point(34, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(143, 12);
             this.label2.TabIndex = 12;
@@ -175,19 +181,63 @@
             // 
             // bitSize
             // 
-            this.bitSize.Location = new System.Drawing.Point(272, 40);
+            this.bitSize.Location = new System.Drawing.Point(183, 65);
             this.bitSize.Name = "bitSize";
             this.bitSize.Size = new System.Drawing.Size(60, 21);
             this.bitSize.TabIndex = 13;
             this.bitSize.Text = "500";
             this.bitSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // local_check_box
+            // 
+            this.local_check_box.AutoSize = true;
+            this.local_check_box.Location = new System.Drawing.Point(132, 29);
+            this.local_check_box.Name = "local_check_box";
+            this.local_check_box.Size = new System.Drawing.Size(96, 16);
+            this.local_check_box.TabIndex = 14;
+            this.local_check_box.Text = "推送本地文件";
+            this.local_check_box.UseVisualStyleBackColor = true;
+            this.local_check_box.CheckedChanged += new System.EventHandler(this.local_check_box_CheckedChanged);
+            // 
+            // carema_check
+            // 
+            this.carema_check.AutoSize = true;
+            this.carema_check.Location = new System.Drawing.Point(253, 29);
+            this.carema_check.Name = "carema_check";
+            this.carema_check.Size = new System.Drawing.Size(84, 16);
+            this.carema_check.TabIndex = 15;
+            this.carema_check.Text = "推送摄像头";
+            this.carema_check.UseVisualStyleBackColor = true;
+            this.carema_check.CheckedChanged += new System.EventHandler(this.carema_check_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(34, 177);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "本地文件：";
+            // 
+            // local_file
+            // 
+            this.local_file.Location = new System.Drawing.Point(148, 174);
+            this.local_file.Name = "local_file";
+            this.local_file.ReadOnly = true;
+            this.local_file.Size = new System.Drawing.Size(133, 21);
+            this.local_file.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(362, 465);
+            this.Controls.Add(this.local_file);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.carema_check);
+            this.Controls.Add(this.local_check_box);
             this.Controls.Add(this.bitSize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.all_in_check);
@@ -202,6 +252,7 @@
             this.Controls.Add(this.dShow_Name);
             this.Controls.Add(this.choose_dShow);
             this.Controls.Add(this.tip);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -226,6 +277,10 @@
         private System.Windows.Forms.CheckBox all_in_check;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox bitSize;
+        private System.Windows.Forms.CheckBox local_check_box;
+        private System.Windows.Forms.CheckBox carema_check;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox local_file;
     }
 }
 
